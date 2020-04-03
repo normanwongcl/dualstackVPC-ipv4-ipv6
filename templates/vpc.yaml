@@ -58,7 +58,6 @@ Resources:
   VPCFlowLog:
     #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html
     Type: "AWS::EC2::FlowLog"
-    DependsOn: VPCFlowLogGroup
     Properties:
       DeliverLogsPermissionArn: !GetAtt VPCFlowLogRole.Arn
       #LogDestination
@@ -391,42 +390,36 @@ Resources:
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref MysqlRDSRouteTable1
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   IPv6RDSPrivateRoute2:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref MysqlRDSRouteTable2
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   IPv6RDSPrivateRoute3:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref MysqlRDSRouteTable3
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   IPv6RedisPrivateRoute1:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref RedisRouteTable1
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   IPv6RedisPrivateRoute2:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref RedisRouteTable2
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   IPv6RedisPrivateRoute3:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
       RouteTableId: !Ref RedisRouteTable3
-      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   #####################################################
   # Associate Gateways and IPv4 destination to route  #
@@ -495,35 +488,30 @@ Resources:
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref MysqlRDSRouteTable2
-      NatGatewayId: !Ref NatGateway2
 
   IPv4RDSPrivateRoute3:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref MysqlRDSRouteTable3
-      NatGatewayId: !Ref NatGateway3
 
   IPv4RedisPrivateRoute1:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref RedisRouteTable1
-      NatGatewayId: !Ref NatGateway1
 
   IPv4RedisPrivateRoute2:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref RedisRouteTable2
-      NatGatewayId: !Ref NatGateway2
 
   IPv4RedisPrivateRoute3:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref RedisRouteTable3
-      NatGatewayId: !Ref NatGateway3
 
   ##########################
   # Create Public subnets  #
@@ -1137,15 +1125,31 @@ Outputs:
     Export:
       Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PublicSubnet-List"]]
 
-  PrivateSubnets:
-    Description: A list of the private subnets
-    Value:
-      !Join [
-        ",",
-        [!Ref PrivateSubnet1, !Ref PrivateSubnet2, !Ref PrivateSubnet3],
-      ]
+  NATSubnets:
+    Description: A list of the NAT-tier subnets
+    Value: !Join [",", [!Ref NATSubnet1, !Ref NATSubnet2, !Ref NATSubnet3]]
     Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateSubnet-List"]]
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATSubnet-List"]]
+
+  WebAppSubnets:
+    Description: A list of the WebApp-tier subnets
+    Value:
+      !Join [",", [!Ref WebAppSubnet1, !Ref WebAppSubnet2, !Ref WebAppSubnet3]]
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::WebAppSubnet-List"]]
+
+  RDSSubnets:
+    Description: A list of the RDS-tier subnets
+    Value: !Join [",", [!Ref RDSSubnet1, !Ref RDSSubnet2, !Ref RDSSubnet3]]
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RDSSubnet-List"]]
+
+  RedisElasticacheSubnets:
+    Description: A list of the Redis-tier subnets
+    Value:
+      !Join [",", [!Ref RedisSubnet1, !Ref RedisSubnet2, !Ref RedisSubnet3]]
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RedisSubnets-List"]]
 
   PublicSubnet1:
     Description: A reference to the public subnet in the 1st Availability Zone
@@ -1165,38 +1169,91 @@ Outputs:
     Export:
       Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PublicSubnet-3"]]
 
-  PrivateSubnet1:
-    Description: A reference to the private subnet in the 1st Availability Zone
-    Value: !Ref PrivateSubnet1
+  NATSubnet1:
+    Description: A reference to the NAT subnet in the 1st Availability Zone
+    Value: !Ref NATSubnet1
     Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateSubnet-1"]]
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATSubnet-1"]]
 
-  PrivateSubnet2:
-    Description: A reference to the private subnet in the 2nd Availability Zone
-    Value: !Ref PrivateSubnet2
+  NATSubnet2:
+    Description: A reference to the NAT subnet in the 2nd Availability Zone
+    Value: !Ref NATSubnet2
     Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateSubnet-2"]]
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATSubnet-2"]]
 
-  PrivateSubnet3:
-    Description: A reference to the private subnet in the 3rd Availability Zone
-    Value: !Ref PrivateSubnet3
+  NATSubnet3:
+    Description: A reference to the NAT subnet in the 3rd Availability Zone
+    Value: !Ref NATSubnet3
     Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateSubnet-3"]]
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATSubnet-3"]]
 
-  NatGateway1EIP:
-    Description: NAT Gateway 1 IP address
-    Value: !Ref NatGatewayEIP
+  WebAppSubnet1:
+    Description: A reference to the WebApp subnet in the 1st Availability Zone
+    Value: !Ref WebAppSubnet1
     Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATGateway-1"]]
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::WebAppSubnet-1"]]
+
+  WebAppSubnet2:
+    Description: A reference to the WebApp subnet in the 2nd availability Zone
+    Value: !Ref WebAppSubnet2
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::WebAppSubnet-2"]]
+
+  WebAppSubnet3:
+    Description: A reference to the WebApp subnet in the 3rd Availability Zone
+    Value: !Ref WebAppSubnet3
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::WebAppSubnet-3"]]
+
+  RDSSubnet1:
+    Description: A reference to the RDS subnet in the 1st Availability Zone
+    Value: !Ref RDSSubnet1
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RDSSubnet-1"]]
+
+  RDSSubnet2:
+    Description: A reference to the RDS subnet in the 2nd Availability Zone
+    Value: !Ref RDSSubnet2
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RDSSubnet-2"]]
+
+  RDSSubnet3:
+    Description: A reference to the RDS subnet in the 3rd Availability Zone
+    Value: !Ref RDSSubnet3
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RDSSubnet-3"]]
+
+  RedisSubnet1:
+    Description: A reference to the RDS subnet in the 1st Availability Zone
+    Value: !Ref RedisSubnet1
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RedisSubnet-1"]]
+
+  RedisSubnet2:
+    Description: A reference to the RDS subnet in the 2nd Availability Zone
+    Value: !Ref RedisSubnet2
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RedisSubnet-2"]]
+
+  RedisSubnet3:
+    Description: A reference to the RDS subnet in the 3rd Availability Zone
+    Value: !Ref RedisSubnet3
+    Export:
+      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::RedisSubnet-3"]]
+
+  # NatGateway1EIP:
+  #   Description: NAT Gateway 1 IP address
+  #   Value: !Ref NatGatewayEIP
+  #   Export:
+  #     Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::NATGateway-1"]]
 
   PublicRouteTable:
     Description: A reference to the public route table ID
     Value: !Ref PublicRouteTable
     Export:
       Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PublicRouteTable"]]
-
-  PrivateRouteTable:
-    Description: A reference to the private route-table ID
-    Value: !Ref PrivateRouteTable
-    Export:
-      Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateRouteTable"]]
+  # PrivateRouteTable:
+  #   Description: A reference to the private route-table ID
+  #   Value: !Ref PrivateRouteTable
+  #   Export:
+  #     Name: !Join ["", ["VPC::", !Ref EnvironmentName, "::PrivateRouteTable"]]

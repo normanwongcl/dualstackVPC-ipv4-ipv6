@@ -1027,96 +1027,95 @@ Resources:
   #################################################
   # Subnets ID inputs for IPv6WorkaroundLambda    #
   #################################################
-  IPv6WorkaroundPublicSubnetA:
+  IPv6WorkaroundPublicSubnet1:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref PublicSubnet1
 
-  IPv6WorkaroundPublicSubnetB:
+  IPv6WorkaroundPublicSubnet2:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref PublicSubnet2
 
-  IPv6WorkaroundPublicSubnetC:
+  IPv6WorkaroundPublicSubnet3:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref PublicSubnet3
 
-  IPv6WorkaroundPrivateSubnetA:
+  IPv6WorkaroundNATSubnet1:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref NATSubnet1
 
-  IPv6WorkaroundPrivateSubnetB:
+  IPv6WorkaroundNATSubnet2:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref NATSubnet2
 
-  IPv6WorkaroundPrivateSubnetC:
+  IPv6WorkaroundNATSubnet3:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref NATSubnet3
 
-  IPv6WorkaroundPrivateSubnetA:
+  IPv6WorkaroundWebAppSubnet1:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref WebAppSubnet1
 
-  IPv6WorkaroundPrivateSubnetB:
+  IPv6WorkaroundWebAppSubnet2:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref WebAppSubnet2
 
-  IPv6WorkaroundPrivateSubnetC:
+  IPv6WorkaroundWebAppSubnet3:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref WebAppSubnet3     
+      SubnetId: !Ref WebAppSubnet3
 
-
-  IPv6WorkaroundPrivateSubnetA:
+  IPv6WorkaroundRDSSubnet1:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref RDSSubnet1
 
-  IPv6WorkaroundPrivateSubnetB:
+  IPv6WorkaroundRDSSubnet2:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref RDSSubnet2
 
-  IPv6WorkaroundPrivateSubnetC:
+  IPv6WorkaroundRDSSubnet3:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref RDSSubnet3    
+      SubnetId: !Ref RDSSubnet3
 
-  IPv6WorkaroundPrivateSubnetA:
+  IPv6WorkaroundRedisSubnet1:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref RedisSubnet1
 
-  IPv6WorkaroundPrivateSubnetB:
+  IPv6WorkaroundRedisSubnet2:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
       SubnetId: !Ref RedisSubnet2
 
-  IPv6WorkaroundPrivateSubnetC:
+  IPv6WorkaroundRedisSubnet3:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref RedisSubnet3  
+      SubnetId: !Ref RedisSubnet3
 
 Outputs:
   VPC:

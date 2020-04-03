@@ -1049,19 +1049,75 @@ Resources:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref PrivateSubnet1
+      SubnetId: !Ref NATSubnet1
 
   IPv6WorkaroundPrivateSubnetB:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref PrivateSubnet2
+      SubnetId: !Ref NATSubnet2
 
   IPv6WorkaroundPrivateSubnetC:
     Type: Custom::SubnetModify
     Properties:
       ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
-      SubnetId: !Ref PrivateSubnet3
+      SubnetId: !Ref NATSubnet3
+
+  IPv6WorkaroundPrivateSubnetA:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref WebAppSubnet1
+
+  IPv6WorkaroundPrivateSubnetB:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref WebAppSubnet2
+
+  IPv6WorkaroundPrivateSubnetC:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref WebAppSubnet3     
+
+
+  IPv6WorkaroundPrivateSubnetA:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RDSSubnet1
+
+  IPv6WorkaroundPrivateSubnetB:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RDSSubnet2
+
+  IPv6WorkaroundPrivateSubnetC:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RDSSubnet3    
+
+  IPv6WorkaroundPrivateSubnetA:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RedisSubnet1
+
+  IPv6WorkaroundPrivateSubnetB:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RedisSubnet2
+
+  IPv6WorkaroundPrivateSubnetC:
+    Type: Custom::SubnetModify
+    Properties:
+      ServiceToken: !GetAtt IPv6WorkaroundLambda.Arn
+      SubnetId: !Ref RedisSubnet3  
+
 Outputs:
   VPC:
     Description: A reference to the created VPC

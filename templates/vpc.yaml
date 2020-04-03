@@ -334,6 +334,7 @@ Resources:
   #####################################################
   # Associate Gateways and IPv6 destination to route  #
   #####################################################
+
   IPv6PublicRoute:
     Type: "AWS::EC2::Route"
     Properties:
@@ -343,11 +344,88 @@ Resources:
       GatewayId:
         Ref: InternetGateway
 
-  IPv6PrivateRoute:
+  IPv6NATRoute1:
     Type: "AWS::EC2::Route"
     Properties:
       DestinationIpv6CidrBlock: "::/0"
-      RouteTableId: !Ref PrivateRouteTable
+      RouteTableId: !Ref NATRouteTable1
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6NATRoute2:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref NATRouteTable2
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6NATRoute3:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref NATRouteTable3
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6WebTierPrivateRoute1:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref WebTierRouteTable1
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6WebTierPrivateRoute2:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref WebTierRouteTable2
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6WebTierPrivateRoute3:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref WebTierRouteTable3
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RDSPrivateRoute1:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref MysqlRDSRouteTable1
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RDSPrivateRoute2:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref MysqlRDSRouteTable2
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RDSPrivateRoute3:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref MysqlRDSRouteTable3
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RedisPrivateRoute1:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref RedisRouteTable1
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RedisPrivateRoute2:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref RedisRouteTable2
+      EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
+
+  IPv6RedisPrivateRoute3:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationIpv6CidrBlock: "::/0"
+      RouteTableId: !Ref RedisRouteTable3
       EgressOnlyInternetGatewayId: !Ref EgressOnlyInternetGateway
 
   #####################################################

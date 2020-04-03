@@ -325,7 +325,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: Name
-          Value: !Sub ${AWS::StackName} sRedis Elasticache Route 3
+          Value: !Sub ${AWS::StackName} Redis Elasticache Route 3
         - Key: Account
           Value: !Ref AWS::AccountId
         - Key: ENV
@@ -777,9 +777,9 @@ Resources:
         - Key: ENV
           Value: !Ref EnvironmentName
 
-  #############################################################
-  # Associate subnets to either public or private route table #
-  #############################################################
+  #######################################################
+  # Associate subnets to either public  route table     #
+  #######################################################
   PublicSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -798,23 +798,82 @@ Resources:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet3
 
-  PrivateSubnet1RouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref PrivateSubnet1
+  ######### TODO
 
-  PrivateSubnet2RouteTableAssociation:
+  NATRouteTable1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref PrivateSubnet2
+      RouteTableId: !Ref NATRouteTable1
+      SubnetId: !Ref NATSubnet1
 
-  PrivateSubnet3RouteTableAssociation:
+  NATRouteTable2RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref PrivateSubnet3
+      RouteTableId: !Ref NATRouteTable2
+      SubnetId: !Ref NATSubnet2
+
+  NATRouteTable3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref NATRouteTable3
+      SubnetId: !Ref NATSubnet3
+
+  ###
+  WebTierRouteTable1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref WebTierRouteTable1
+      SubnetId: !Ref WebAppSubnet1
+
+  WebTierRouteTable2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref WebTierRouteTable1
+      SubnetId: !Ref WebAppSubnet2
+
+  WebTierRouteTable3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref WebTierRouteTable1
+      SubnetId: !Ref WebAppSubnet3
+
+  ###
+  MysqlRDSRouteTable1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref MysqlRDSRouteTable1
+      SubnetId: !Ref RDSSubnet1
+
+  MysqlRDSRouteTable2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref MysqlRDSRouteTable2
+      SubnetId: !Ref RDSSubnet2
+
+  MysqlRDSRouteTable3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref MysqlRDSRouteTable3
+      SubnetId: !Ref RDSSubnet3
+
+  ###
+  RedisRouteTable1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RedisRouteTable1
+      SubnetId: !Ref RedisSubnet1
+
+  RedisRouteTable2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RedisRouteTable2
+      SubnetId: !Ref RedisSubnet2
+
+  RedisRouteTable3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RedisRouteTable3
+      SubnetId: !Ref RedisSubnet3
 
   ########################################
   # Workaround to fix the ec2 api bug    #

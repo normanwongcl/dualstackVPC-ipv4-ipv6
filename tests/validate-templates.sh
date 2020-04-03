@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Code snippet: https://github.com/aws-samples/ecs-refarch-cloudformation/blob/master/tests/validate-templates.sh
 ERROR_COUNT=0; 
 
 echo "Validating AWS CloudFormation templates..."

@@ -88,7 +88,7 @@ This repository provides a set of YAML templates to create a dualstack IPv4 and 
                 </tr>
                 <tr>
                     <td>
-                        <a href="images/vpc/security-groups.png" target="_blank"><img src="images/vpc/security-groups.png" width:100% alt="View Diagram"></a>
+                        <a href="images/diagrams/security-groups.png" target="_blank"><img src="images/diagrams/security-groups.png" width:100% alt="View Diagram"></a>
                     </td>
                 </tr>
             </table>

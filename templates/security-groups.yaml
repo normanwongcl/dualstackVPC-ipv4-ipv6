@@ -165,22 +165,14 @@ Resources:
     Properties:
       GroupDescription: >-
         Open endpoints for access
+      GroupName: "Endpoints-sg"
       VpcId:
         Fn::ImportValue: !Sub VPC::${EnvironmentName}::VPC-ID
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
-          # Limitation of cloudformation. Cannot get cidr blocks allocated to subnets
-          CidrIp: 10.0.32.0/20
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 10.0.80.0/20
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 10.0.144.0/20
+          SourceSecurityGroupId: !Ref WebServerSecurityGroup
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-Endpoints

@@ -60,4 +60,40 @@ This repository provides a set of YAML templates to create a dualstack IPv4 and 
     </tr>
 </table>
 
+### Security-Groups
+
+[Back to Top](#overview)
+
+<table width="100%">
+    <tr>
+        <th align="left" colspan="2"><h4><a href="https://github.com/Klezca/dualstackVPC-ipv4-ipv6/blob/master/templates/security-groups.yaml">Security Groups</a></h4></th>
+    </tr>
+    <tr>
+        <td width="100%" valign="top">
+            <p>Select the foundational pieces for building out the necessary security groups.</p>
+            <h6>Create Details</h6>
+            <ol>
+                <li>Web Server Security Group</li>
+                <li>Load Balancer Security Group</li>
+                <li>MySQL RDS Security Group</li>
+                <li>Redis Elasticache Security Group</li>
+                <li>VPC Endpoints Interface Security Group</li>
+                <li>ICMPv4 and ICMPv6 Security Group (optional)</li>
+            </ol>
+        </td>
+        <td  nowrap width="200" valign="top">
+            <table>
+                <tr>
+                    <th align="left">View Diagram</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="images/vpc/security-groups.png" target="_blank"><img src="images/vpc/security-groups.png" width:100% alt="View Diagram"></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
 # Work in Progress

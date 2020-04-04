@@ -23,7 +23,7 @@ This repository provides a set of YAML templates to create a dualstack IPv4 and 
 
 <table width="100%">
     <tr>
-        <th align="left" colspan="2"><h4><a href="https://github.com/klezca/aws-infrastructure-2/blob/master/templates/vpc/vpc.yaml">VPC</a></h4></th>
+        <th align="left" colspan="2"><h4><a href="https://github.com/Klezca/dualstackVPC-ipv4-ipv6/blob/master/templates/vpc.yaml">VPC</a></h4></th>
     </tr>
     <tr>
         <td width="100%" valign="top">

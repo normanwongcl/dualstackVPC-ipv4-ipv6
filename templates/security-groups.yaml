@@ -158,11 +158,13 @@ Resources:
         - Key: ENV
           Value: !Ref EnvironmentName
 
+  # VPC interface endpoints security group
+  # This security group defines who/where is allowed to access the VPC interface endpoints
   EndpointSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
-        EnabOpen endpoints for access
+        Open endpoints for access
       VpcId:
         Fn::ImportValue: !Sub VPC::${EnvironmentName}::VPC-ID
       SecurityGroupIngress:

@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >
-  This template deploys all the security groups for the vpc.
+  This template deploys all the security groups for the vpc 
+  that will restrict traffic at the instance level
 
 Metadata:
   License: Apache 2.0

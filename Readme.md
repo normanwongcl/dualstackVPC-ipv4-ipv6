@@ -2,6 +2,11 @@
 
 This repository provides a set of YAML templates to create a dualstack IPv4 and IPv6 VPC in AWS.
 
+## Goals
+- The aim of this project was to build out an over-complicated IPv4/IPv6 network in AWS from scratch during my free time.
+- To be used as future reference material for myself.
+
+
 ## Overview
 
 ![infrastructure-overview](images/overview.png)

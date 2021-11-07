@@ -1,4 +1,4 @@
-# Dualstack IPv4/IPv6 VPC network (Work in progress)
+# Dualstack IPv4/IPv6 VPC network (Discontinued)
 
 This repository provides a set of YAML templates to create a dualstack IPv4 and IPv6 VPC in AWS.
 
